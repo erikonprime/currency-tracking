@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
             ['USD', 'EUR'],
             ['USD', 'JPY'],
             ['EUR', 'GBP'],
-            ['EUR', 'ALL'],
+            ['EUR', 'CAD'],
             ['EUR', 'RUB'],
             ['EUR', 'CNY'],
         ];

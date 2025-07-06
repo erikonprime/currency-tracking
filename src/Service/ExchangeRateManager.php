@@ -31,8 +31,6 @@ class ExchangeRateManager
             throw new \RuntimeException();
         }
 
-        $rate = $res['data'][$exchangePair->getTargetCurrency()] ?? null;
-
         $rate = new ExchangeRate($exchangePair, $rate);
 
         $this->em->persist($rate);

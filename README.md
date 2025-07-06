@@ -18,14 +18,18 @@ Currency tracking app based on Symfony 7.3 + RabbitMQ + Docker
 docker compose build --no-cache
 docker compose up -d --force-recreate
 composer install
+# create database
+php bin/console doctrine:database:create
+# execute migrations
 php bin/console doctrine:migrations:migrate
 ```
-* App available on  http://localhost:8080/ 
-* RabbitMQ available on http://localhost:15672/
 * optional. run command to load fixtures
 ```
 php bin/console doctrine:fixtures:load
 ```
+
+* App available on  http://localhost:8080/ 
+* RabbitMQ available on http://localhost:15672/
 
 ### How to use
 ### Command 'exchange:pair'
@@ -54,6 +58,28 @@ To enable tracking follow these steps:
 ```
 php bin/console messenger:consume async -vv
 php bin/console messenger:consume scheduler_default -vv
+```
+
+### Endpoint 'api/exchange-rate'
+```
+'GET /api/exchange-rate?base=EUR&target[]=CAD&target[]=GBP&&at=2025-07-06T15:12:00
+
+{
+  "items": [
+    {
+      "base": "EUR",
+      "target": "CAD",
+      "rate": "1.6040942474",
+      "date": "2025-07-06 15:12:01"
+    },
+    {
+      "base": "EUR",
+      "target": "GBP",
+      "rate": "0.8636668761",
+      "date": "2025-07-06 15:12:01"
+    }
+  ]
+}
 ```
 
 #### Tips & Tricks
