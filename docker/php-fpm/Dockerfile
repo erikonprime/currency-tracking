@@ -8,10 +8,10 @@ RUN apt update \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip \
     && apt install -y librabbitmq-dev libssh-dev \
-        && pecl install amqp-1.11.0 \
-        && docker-php-ext-enable amqp
+    && pecl install amqp-1.11.0 \
+    && docker-php-ext-enable amqp \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/app
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN chmod -R 777 /var/www/app

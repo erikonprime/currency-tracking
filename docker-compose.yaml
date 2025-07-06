@@ -1,4 +1,3 @@
-version: '3.5'
 services:
     currency-tracking:
         hostname: currency-tracking-php
