@@ -17,9 +17,8 @@ Currency tracking app based on Symfony 7.3 + RabbitMQ + Docker
 ```
 docker compose build --no-cache
 docker compose up -d --force-recreate
+docker exec -it currency-tracking-php bash
 composer install
-# create database
-php bin/console doctrine:database:create
 # execute migrations
 php bin/console doctrine:migrations:migrate
 ```
@@ -38,17 +37,14 @@ php bin/console doctrine:fixtures:load
 php bin/console exchange:pair
 ```
 * Enter Base and Target currency
-```
-Please enter the base currency:
-Please enter the target currency:
-```
+> Please enter the base currency:  
+> Please enter the target currency:
+
 * Select action (add, remove, history)
-```
-Please select action ("add" by default)
-  [0] add
-  [1] remove
-  [2] history
-```
+> Please select action ("add" by default)  
+>   [0] add  
+>   [1] remove  
+>   [2] history
 
 ### Command 'exchange:pair:track'
 Command track currency pair rates.
@@ -60,9 +56,14 @@ php bin/console messenger:consume async -vv
 php bin/console messenger:consume scheduler_default -vv
 ```
 
-### Endpoint 'api/exchange-rate'
+### Endpoint '/api/exchange-rate'
+
+- **`base`** (`string`, required): Base currency code (e.g. `EUR`)
+- **`target[]`** (`array`, required): One or more target currency codes (e.g. `CAD`, `GBP`)
+- **`at`** (`string`, required): Datetime in `YYYY-MM-DDTHH:MM:SS` format (e.g. `2025-07-06T15:12:01`)  
+  Precision is up to seconds. The search matches records with exact datetime.
 ```
-'GET /api/exchange-rate?base=EUR&target[]=CAD&target[]=GBP&&at=2025-07-06T15:12:00
+'GET /api/exchange-rate?base=EUR&target[]=CAD&target[]=GBP&&at=2025-07-06T15:12:01
 
 {
   "items": [

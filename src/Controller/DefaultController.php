@@ -18,9 +18,9 @@ final class DefaultController extends AbstractController
             'request_parameters:' => [
                 'base' => 'EUR',
                 'target[]' => 'CAD,GBP',
-                'at' => '2024-07-04T15:00:004',
+                'at' => '2024-07-04T15:00:01',
             ],
-            'example' => 'GET /api/exchange-rate?base=EUR&target[]=CAD&target[]=GBP&&at=2025-07-04T15:00:00'
+            'example' => 'GET /api/exchange-rate?base=EUR&target[]=CAD&target[]=GBP&&at=2025-07-04T15:00:01'
 
         ]);
     }
